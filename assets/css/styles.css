@@ -904,3 +904,291 @@ img {
     right: 3rem;
   }
 }
+
+/*=============== INTRODUCTION ===============*/
+.intro__container {
+  text-align: center;
+  max-width: 800px;
+}
+
+.intro__content p {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/*=============== MISSION COMMITMENTS ===============*/
+.mission__commitments {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.mission__commitment {
+  background: var(--container-color);
+  padding: 1.5rem;
+  border-radius: .5rem;
+  text-align: center;
+}
+
+.mission__commitment i {
+  font-size: 2rem;
+  color: var(--title-color);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.mission__commitment h3 {
+  font-size: var(--h3-font-size);
+  margin-bottom: .5rem;
+}
+
+.mission__commitment p {
+  font-size: var(--small-font-size);
+}
+
+/*=============== VISION ===============*/
+.vision__content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.vision__image {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 2rem;
+  border-radius: .5rem;
+}
+
+/*=============== SERVICES ===============*/
+.services__intro {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.service__card {
+  background: var(--container-color);
+  padding: 1.5rem;
+  border-radius: .5rem;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.service__card:hover {
+  transform: translateY(-5px);
+}
+
+.service__icon {
+  font-size: 2rem;
+  color: var(--title-color);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.service__card h3 {
+  font-size: var(--h3-font-size);
+  margin-bottom: .5rem;
+}
+
+/*=============== CTA ===============*/
+.cta__container {
+  text-align: center;
+  background: var(--container-color);
+  padding: 3rem 2rem;
+  border-radius: .5rem;
+}
+
+.cta__title {
+  font-size: var(--h2-font-size);
+  margin-bottom: 1rem;
+}
+
+.cta__text {
+  margin-bottom: 2rem;
+  color: var(--text-color);
+}
+
+/*=============== MEDIA QUERIES ===============*/
+@media screen and (min-width: 768px) {
+  .mission__commitments {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .mission__commitments {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .services__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/*=============== BOOKING POPUP ===============*/
+.booking__popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: hsla(0, 0%, 0%, 0.5);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s, visibility 0.4s;
+}
+
+.booking__popup-content {
+  position: relative;
+  background-color: var(--container-color);
+  padding: 3.5rem 2.5rem 2.5rem;
+  border-radius: 1.5rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.booking__popup-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--title-color);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.booking__popup-close:hover {
+  color: var(--text-color-light);
+}
+
+.booking__popup-title {
+  font-size: var(--h2-font-size);
+  margin-bottom: 0.5rem;
+}
+
+.booking__popup-description {
+  margin-bottom: 2rem;
+  color: var(--text-color);
+}
+
+.booking__popup-form {
+  display: grid;
+  row-gap: 1.5rem;
+}
+
+.booking__popup-inputs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 576px) {
+  .booking__popup-inputs {
+     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.booking__popup-group {
+  position: relative;
+}
+
+.booking__popup-input {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--body-color);
+  border: 2px solid var(--text-color-light);
+  color: var(--title-color);
+  border-radius: 0.5rem;
+  transition: border 0.3s;
+}
+
+.booking__popup-input:focus {
+  border-color: var(--title-color);
+  outline: none;
+}
+
+.booking__popup-input::placeholder {
+  color: var(--text-color-light);
+}
+
+.booking__popup-button {
+  width: 100%;
+  cursor: pointer;
+}
+
+.booking__button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 100;
+  box-shadow: 0 4px 12px hsla(0, 0%, 0%, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Active Popup */
+.active-popup {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Booking Popup Styles */
+.booking__popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.booking__popup.active-popup {
+  opacity: 1;
+  visibility: visible;
+}
+
+.booking__popup-content {
+  background-color: var(--container-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 500px;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.active-popup .booking__popup-content {
+  transform: translateY(0);
+}
+
+.booking__popup-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--title-color);
+}
