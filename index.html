@@ -14,7 +14,7 @@
    <!--=============== CSS ===============-->
    <link rel="stylesheet" href="assets/css/styles.css">
 
-   <title>Travel</title>
+   <title>No.1 Travel Agency in South India | Cool Trip Consultant</title>
 </head>
 
 <body>
@@ -67,20 +67,21 @@
          <div class="home__container container grid">
             <div class="home__data">
                <h3 class="home__subtitle">
-                  Your Perfect Trip
+                  Welcome To Travel
                </h3>
 
                <h1 class="home__title">
-                  Starts Here!
+                  travel, worldclass
                </h1>
 
                <p class="home__description">
-                  Cool Trip offers custom travel packages for all occasions. We handle all the planning so you can enjoy a stress-free, premium travel experience at budget-friendly prices. Book your adventure today!
+                  The real voyage of discovery consists not in seeking new landscapes, but in having new eyes. Discover it
+with Cool Trip Consultant, the No.1 travel brand in South India.
                </p>
 
-               <a href="#" class="button">
-                  Start Your Journey <i class="ri-arrow-right-line"></i>
-               </a>
+               <a href="#" class="button" id="start-journey">
+                  Book Your Trip <i class="ri-arrow-right-line"></i>
+                </a>
             </div>
 
             <div class="home__cards grid">
@@ -258,6 +259,61 @@
       </section>
    </main>
 
+   <!--==================== BOOKING POPUP ====================-->
+<div class="booking__popup" id="booking-popup">
+   <div class="booking__popup-content">
+     <div class="booking__popup-close" id="booking-close">
+       <i class="ri-close-line"></i>
+    </div>
+
+      <h2 class="booking__popup-title">Book Your Adventure</h2>
+      <p class="booking__popup-description">Fill out this form and our travel experts will contact you shortly</p>
+
+      <form class="booking__popup-form">
+         <div class="booking__popup-inputs">
+            <div class="booking__popup-group">
+               <input type="text" placeholder="Full Name" class="booking__popup-input" required>
+            </div>
+            
+            <div class="booking__popup-group">
+               <input type="email" placeholder="Email Address" class="booking__popup-input" required>
+            </div>
+         </div>
+
+         <div class="booking__popup-group">
+            <input type="tel" placeholder="Phone Number" class="booking__popup-input" required>
+         </div>
+
+         <div class="booking__popup-group">
+            <select class="booking__popup-input" required>
+               <option value="" disabled selected>Select Destination</option>
+               <option value="croatia">Croatia</option>
+               <option value="iceland">Iceland</option>
+               <option value="italy">Italy</option>
+               <option value="spain">Spain</option>
+            </select>
+         </div>
+
+         <div class="booking__popup-group">
+            <input type="date" placeholder="Travel Date" class="booking__popup-input" required>
+         </div>
+
+         <div class="booking__popup-group">
+            <input type="number" placeholder="Number of Travelers" min="1" class="booking__popup-input" required>
+         </div>
+
+         <button type="submit" class="button booking__popup-button">
+            Book Now <i class="ri-arrow-right-line"></i>
+         </button>
+      </form>
+   </div>
+</div>
+
+<!-- Add this button to trigger the popup (you can place it anywhere, like in the home section) -->
+<button class="button booking__button" id="booking-button">
+   Book Your Trip <i class="ri-calendar-line"></i>
+</button>
+
    <!--==================== FOOTER ====================-->
    <footer class="footer">
       <div class="footer__container container grid">
@@ -277,7 +333,7 @@
 
                   <ul class="footer__links">
                      <li>
-                        <a href="#" class="footer__link">About Us</a>
+                        <a href="page/about.html" class="footer__link">About Us</a>
                      </li>
 
                      <li>
