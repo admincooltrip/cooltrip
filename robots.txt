@@ -1,0 +1,7 @@
+# Allow all web crawlers to access the entire site
+User-agent: *
+Disallow:
+
+# Location of the sitemap file
+Sitemap: https://cooltrip.org/sitemap.xml
+Sitemap: https://cooltripconsultant.in/sitemap.xml
