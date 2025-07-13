@@ -106,17 +106,47 @@ bookingPopup.addEventListener('click', (e) => {
 });
 
 /* Form submission handling */
-const bookingForm = document.querySelector('.booking__popup-form');
-if(bookingForm) {
-   bookingForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      // Here you would normally send the form data to your server
-      // For demo purposes, we'll just show an alert and close the popup
-      alert('Booking request received! We will contact you shortly.');
-      bookingPopup.classList.remove('active-popup');
-      bookingForm.reset();
-   });
+const bookingForm = document.getElementById('booking-form'); // Use the ID we added
+if (bookingForm) {
+    bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Prevent default form submission
+
+        const popup = document.getElementById('booking-popup');
+        const submitButton = bookingForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerHTML;
+
+        // Change button text to show it's working
+        submitButton.innerHTML = 'Sending...';
+        submitButton.disabled = true;
+
+        // Get the form data
+        const formData = new FormData(bookingForm);
+
+        // Send the data to the PHP script
+        fetch('send_booking_email.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            // Show success message
+            alert('Thank you! Your booking request has been sent successfully.');
+            
+            // Close the popup and reset the form
+            popup.classList.remove('active-popup');
+            bookingForm.reset();
+        })
+        .catch(error => {
+            // Show error message
+            alert('Sorry, there was an error sending your request. Please try again later.');
+            console.error('Error:', error);
+        })
+        .finally(() => {
+            // Restore button text and state
+            submitButton.innerHTML = originalButtonText;
+            submitButton.disabled = false;
+        });
+    });
 }
 
 /*=============== BOOKING POPUP ===============*/

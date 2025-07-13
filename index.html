@@ -80,7 +80,7 @@ with Cool Trip Consultant, the No.1 travel brand in South India.
                </p>
 
                <a href="#" class="button" id="start-journey">
-                  Book Your Trip <i class="ri-arrow-right-line"></i>
+                      <i class="ri-arrow-right-line"></i>
                 </a>
             </div>
 
@@ -269,23 +269,23 @@ with Cool Trip Consultant, the No.1 travel brand in South India.
       <h2 class="booking__popup-title">Book Your Adventure</h2>
       <p class="booking__popup-description">Fill out this form and our travel experts will contact you shortly</p>
 
-      <form class="booking__popup-form">
+      <form class="booking__popup-form" id="booking-form">
          <div class="booking__popup-inputs">
             <div class="booking__popup-group">
-               <input type="text" placeholder="Full Name" class="booking__popup-input" required>
+               <input type="text" name="fullname" placeholder="Full Name" class="booking__popup-input" required>
             </div>
             
             <div class="booking__popup-group">
-               <input type="email" placeholder="Email Address" class="booking__popup-input" required>
+               <input type="email" name="email" placeholder="Email Address" class="booking__popup-input" required>
             </div>
          </div>
 
          <div class="booking__popup-group">
-            <input type="tel" placeholder="Phone Number" class="booking__popup-input" required>
+            <input type="tel" name="phone" placeholder="Phone Number" class="booking__popup-input" required>
          </div>
 
          <div class="booking__popup-group">
-            <select class="booking__popup-input" required>
+            <select name="destination" class="booking__popup-input" required>
                <option value="" disabled selected>Select Destination</option>
                <option value="croatia">Croatia</option>
                <option value="iceland">Iceland</option>
@@ -295,11 +295,11 @@ with Cool Trip Consultant, the No.1 travel brand in South India.
          </div>
 
          <div class="booking__popup-group">
-            <input type="date" placeholder="Travel Date" class="booking__popup-input" required>
+            <input type="date" name="traveldate" placeholder="Travel Date" class="booking__popup-input" required>
          </div>
 
          <div class="booking__popup-group">
-            <input type="number" placeholder="Number of Travelers" min="1" class="booking__popup-input" required>
+            <input type="number" name="travelers" placeholder="Number of Travelers" min="1" class="booking__popup-input" required>
          </div>
 
          <button type="submit" class="button booking__popup-button">
@@ -337,7 +337,7 @@ with Cool Trip Consultant, the No.1 travel brand in South India.
                      </li>
 
                      <li>
-                        <a href="#" class="footer__link">Features</a>
+                        <a href="page/features.html" class="footer__link">Features</a>
                      </li>
 
                      <li>
@@ -351,7 +351,7 @@ with Cool Trip Consultant, the No.1 travel brand in South India.
 
                   <ul class="footer__links">
                      <li>
-                        <a href="#" class="footer__link">FAQs</a>
+                        <a href="page/faq.html" class="footer__link">FAQs</a>
                      </li>
 
                      <li>
@@ -377,7 +377,7 @@ with Cool Trip Consultant, the No.1 travel brand in South India.
                      </li>
 
                      <li>
-                        <a href="#" class="footer__link">Contact Us</a>
+                        <a href="page/contact.html" class="footer__link">Contact Us</a>
                      </li>
                   </ul>
                </div>
