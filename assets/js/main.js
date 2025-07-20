@@ -1,208 +1,156 @@
-/*=============== SHOW MENU ===============*/
+/*=============== MENU AND HEADER LOGIC ===============*/
 const navMenu = document.getElementById('nav-menu'),
     navToggle = document.getElementById('nav-toggle'),
-    navClose = document.getElementById('nav-close')
+    navClose = document.getElementById('nav-close');
 
-/*===== MENU SHOW =====*/
-/* Validate if constant exists */
+// Show menu
 if (navToggle) {
     navToggle.addEventListener('click', () => {
-        navMenu.classList.add('show-menu')
-    })
+        navMenu.classList.add('show-menu');
+    });
 }
 
-/*===== MENU HIDDEN =====*/
-/* Validate if constant exists */
+// Hide menu
 if (navClose) {
     navClose.addEventListener('click', () => {
-        navMenu.classList.remove('show-menu')
-    })
+        navMenu.classList.remove('show-menu');
+    });
 }
 
-/*=============== REMOVE MENU MOBILE ===============*/
-const navLink = document.querySelectorAll('.nav__link')
-
+// Remove menu on mobile link click
+const navLink = document.querySelectorAll('.nav__link');
 const linkAction = () => {
-    const navMenu = document.getElementById('nav-menu')
-    // When we click on each nav__link, we remove the show-menu class
-    navMenu.classList.remove('show-menu')
+    const navMenu = document.getElementById('nav-menu');
+    navMenu.classList.remove('show-menu');
 }
-navLink.forEach(n => n.addEventListener('click', linkAction))
+navLink.forEach(n => n.addEventListener('click', linkAction));
 
-/*=============== ADD BLUR TO HEADER ===============*/
+// Add blur to header on scroll
 const blurHeader = () => {
-    const header = document.getElementById('header')
-    // When the scroll is greater than 50 viewport height, add the blur-header class to the header tag
-    this.scrollY >= 50
+    const header = document.getElementById('header');
+    window.scrollY >= 50
         ? header.classList.add('blur-header')
-        : header.classList.remove('blur-header')
+        : header.classList.remove('blur-header');
 }
-window.addEventListener('scroll', blurHeader)
+window.addEventListener('scroll', blurHeader);
 
 /*=============== SHOW SCROLL UP ===============*/
 const scrollUp = () => {
-    const scrollUp = document.getElementById('scroll-up')
-    // When the scroll is higher than 350 viewport height, add the show-scroll class to the a tag with the scrollup class
-    this.scrollY >= 350
+    const scrollUp = document.getElementById('scroll-up');
+    window.scrollY >= 350
         ? scrollUp.classList.add('show-scroll')
-        : scrollUp.classList.remove('show-scroll')
+        : scrollUp.classList.remove('show-scroll');
 }
-window.addEventListener('scroll', scrollUp)
+window.addEventListener('scroll', scrollUp);
 
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
-const sections = document.querySelectorAll('section[id]')
-
+const sections = document.querySelectorAll('section[id]');
 const scrollActive = () => {
-    const scrollDown = window.scrollY
-
+    const scrollDown = window.scrollY;
     sections.forEach(current => {
         const sectionHeight = current.offsetHeight,
             sectionTop = current.offsetTop - 58,
             sectionId = current.getAttribute('id'),
-            sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
+            sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']');
 
-        if (scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight) {
-            sectionsClass.classList.add('active-link')
-        } else {
-            sectionsClass.classList.remove('active-link')
+        if (sectionsClass && scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight) {
+            sectionsClass.classList.add('active-link');
+        } else if (sectionsClass) {
+            sectionsClass.classList.remove('active-link');
         }
-    })
+    });
 }
-window.addEventListener('scroll', scrollActive)
+window.addEventListener('scroll', scrollActive);
 
-/*=============== SCROLL REVEAL ANIMATION ===============*/
-const sr = ScrollReveal({
-    origin: 'top',
-    distance: '60px',
-    duration: 3000,
-    delay: 400,
-    //reset:true // Animations repeat
-})
 
-/*=============== BOOKING POPUP ===============*/
+/*=============== BOOKING POPUP LOGIC ===============*/
 const bookingPopup = document.getElementById('booking-popup');
-const bookingButton = document.getElementById('booking-button');
 const bookingClose = document.getElementById('booking-close');
+const bookingForm = document.getElementById('booking-form');
 
-/* Show popup */
-if(bookingButton) {
-   bookingButton.addEventListener('click', () => {
-      bookingPopup.classList.add('active-popup');
-   });
-}
+// Buttons that can open the popup
+const bookingButtons = [
+    document.getElementById('booking-button'),
+    document.getElementById('start-journey')
+];
 
-/* Close popup */
-if(bookingClose) {
-   bookingClose.addEventListener('click', () => {
-      bookingPopup.classList.remove('active-popup');
-   });
-}
+// Function to open the popup
+const openPopup = (e) => {
+    if (e) e.preventDefault();
+    if (bookingPopup) bookingPopup.classList.add('active-popup');
+};
 
-/* Close popup when clicking outside */
-bookingPopup.addEventListener('click', (e) => {
-   if(e.target === bookingPopup) {
-      bookingPopup.classList.remove('active-popup');
-   }
+// Function to close the popup
+const closePopup = () => {
+    if (bookingPopup) bookingPopup.classList.remove('active-popup');
+};
+
+// Add event listeners to all booking buttons
+bookingButtons.forEach(btn => {
+    if (btn) btn.addEventListener('click', openPopup);
 });
 
-/* Form submission handling */
-const bookingForm = document.getElementById('booking-form'); // Use the ID we added
+// Close popup with the 'X' button
+if (bookingClose) {
+    bookingClose.addEventListener('click', closePopup);
+}
+
+// Close popup when clicking outside of the content
+if (bookingPopup) {
+    bookingPopup.addEventListener('click', (e) => {
+        if (e.target === bookingPopup) {
+            closePopup();
+        }
+    });
+}
+
+// Handle Form Submission with Fetch
 if (bookingForm) {
     bookingForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // Prevent default form submission
-
-        const popup = document.getElementById('booking-popup');
+        e.preventDefault();
         const submitButton = bookingForm.querySelector('button[type="submit"]');
         const originalButtonText = submitButton.innerHTML;
-
-        // Change button text to show it's working
         submitButton.innerHTML = 'Sending...';
         submitButton.disabled = true;
 
-        // Get the form data
         const formData = new FormData(bookingForm);
 
-        // Send the data to the PHP script
-        fetch('send_booking_email.php', {
+        fetch('../send_booking_email.php', {
             method: 'POST',
             body: formData
         })
-        .then(response => response.text())
-        .then(data => {
-            // Show success message
-            alert('Thank you! Your booking request has been sent successfully.');
-            
-            // Close the popup and reset the form
-            popup.classList.remove('active-popup');
-            bookingForm.reset();
+        .then(response => {
+             if (response.ok) {
+                 alert('Thank you! Your booking request has been sent successfully.');
+                 closePopup();
+                 bookingForm.reset();
+             } else {
+                 alert('Sorry, there was an error sending your request.');
+             }
         })
         .catch(error => {
-            // Show error message
-            alert('Sorry, there was an error sending your request. Please try again later.');
             console.error('Error:', error);
+            alert('Sorry, there was a network error. Please try again later.');
         })
         .finally(() => {
-            // Restore button text and state
             submitButton.innerHTML = originalButtonText;
             submitButton.disabled = false;
         });
     });
 }
 
-/*=============== BOOKING POPUP ===============*/
-document.addEventListener('DOMContentLoaded', function() {
-    // Get all elements
-    const bookingPopup = document.getElementById('booking-popup');
-    const bookingClose = document.getElementById('booking-close');
-    const startJourneyBtn = document.getElementById('start-journey');
-  
-    // Show popup when Start Journey is clicked
-    if (startJourneyBtn) {
-      startJourneyBtn.addEventListener('click', function(e) {
-        e.preventDefault(); // Prevent default anchor behavior
-        
-        // Add class to show popup
-        bookingPopup.classList.add('active-popup');
-        
-        // Optional: Add animation class
-        document.querySelector('.booking__popup-content').classList.add('animate-popup');
-      });
-    }
-  
-    // Close popup when X is clicked
-    if (bookingClose) {
-      bookingClose.addEventListener('click', function() {
-        bookingPopup.classList.remove('active-popup');
-      });
-    }
-  
-    // Close popup when clicking outside content
-    bookingPopup.addEventListener('click', function(e) {
-      if (e.target === bookingPopup) {
-        bookingPopup.classList.remove('active-popup');
-      }
-    });
-  
-    // Handle form submission
-    const bookingForm = document.querySelector('.booking__popup-form');
-    if (bookingForm) {
-      bookingForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        // Here you would normally send the form data
-        alert('Thank you! We will contact you shortly to plan your journey.');
-        bookingPopup.classList.remove('active-popup');
-        this.reset();
-      });
-    }
-  });
-  
-sr.reveal(`.home__data, .explore__data, .explore__user, .footer__container`)
-sr.reveal(`.home__card`, { delay: 600, distance: '100px', interval: 100 })
-sr.reveal(`.about__data, .join__image`, { origin: 'right' })
-sr.reveal(`.about__image, .join__data`, { origin: 'left' })
-sr.reveal(`.popular__card`, { interval: 200 })
-// Add these to your existing ScrollReveal initialization
-sr.reveal('.about-hero__data', { delay: 200 });
-sr.reveal('.mission__data, .mission__image', { interval: 100 });
-sr.reveal('.team__member', { interval: 200 });
-sr.reveal('.values__item', { interval: 150 });
+/*=============== SCROLL REVEAL ANIMATION ===============*/
+const sr = ScrollReveal({
+    origin: 'top',
+    distance: '60px',
+    duration: 2500,
+    delay: 400,
+});
+
+sr.reveal(`.home__data, .explore__data, .explore__user, .footer__container, .contact__container`);
+sr.reveal(`.home__card`, { delay: 600, distance: '100px', interval: 100 });
+sr.reveal(`.about__data, .join__image`, { origin: 'right' });
+sr.reveal(`.about__image, .join__data`, { origin: 'left' });
+sr.reveal(`.popular__card`, { interval: 200 });
+sr.reveal('.services__grid .service-item', { interval: 150 });
+sr.reveal('.faq__container .faq__item', { interval: 100 });
