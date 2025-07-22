@@ -1322,3 +1322,35 @@ img {
     grid-template-columns: 1fr;
   }
 }
+
+/*=============== MOBILE POLISHING & REFINEMENTS ===============*/
+
+@media screen and (max-width: 767px) {
+  /* --- 1. Improve text readability by left-aligning it --- */
+  .home__data, .about__data, .join__data {
+    text-align: left;
+  }
+  
+  /* Make sure section titles are centered where needed */
+  .section__title {
+    text-align: center;
+  }
+
+  /* --- 2. Make the main "Book Your Trip" button stand out --- */
+  .home__data .button {
+    background-color: hsl(0, 0%, 95%);
+    color: hsl(0, 0%, 8%);
+    width: 100%;
+    justify-content: center;
+    box-shadow: 0 4px 12px hsla(0, 0%, 0%, 0.2);
+  }
+
+  /* --- 3. Refine spacing for better rhythm --- */
+  .home__title {
+    margin-bottom: 1rem;
+  }
+
+  .home__description {
+    margin-bottom: 2.5rem;
+  }
+}
